@@ -2,6 +2,8 @@
 
 Streamlit Web UI for OCRmyPDF. Its codebase is tiny, so if you want to modify it, it should be straightforward. It is also stateless, making it easy to deploy. No volumes. No configuration.
 
+This fork adds support for passing multiple languages to OCRmyPDF API call, make sure to build a new image to enable multi language usage (see Develop section)
+
 ![screenshot](screenshot.png "Screenshot")
 
 ## Requirements
@@ -14,6 +16,19 @@ Streamlit Web UI for OCRmyPDF. Its codebase is tiny, so if you want to modify it
 docker run --rm -p 127.0.0.1:8501:8501 razemio/ocrmypdfonweb
 ```
 
+Or with compose
+
+```
+version: "3.9"
+services:
+  ocrmypdfonweb:
+    container_name: ocrmypdfonweb
+    restart: unless-stopped
+    image: razemio/ocrmypdfonweb
+    ports:
+      - "8501:8501"
+```
+
 Open http://localhost:8501
 
 ## Develop
@@ -21,6 +36,20 @@ Open http://localhost:8501
 ```
 docker build -t razemio/ocrmypdfonweb:dev . # Only needed after you changed requirements.txt
 docker run --rm -it -p 127.0.0.1:8501:8501 -v ${PWD}/server.py:/app/server.py razemio/ocrmypdfonweb:dev
+```
+
+With compose
+
+```
+version: "3.9"
+services:
+  ocrmypdfonweb:
+    container_name: ocrmypdfonweb
+    restart: unless-stopped
+    build:
+      context: .
+    ports:
+      - "8501:8501"
 ```
 
 Happy coding :)
