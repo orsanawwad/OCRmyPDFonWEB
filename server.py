@@ -43,7 +43,7 @@ def uploader_callback():
                     languages = [s for s in ocrmypdf_lang.split("+") if s.strip()]
 
                     ocrmypdf.ocr(path, fixed_path,
-                        language=languages
+                        language=languages,
                         remove_background=ocrmypdf_remove_background, 
                         optimize=ocrmypdf_optimize,
                         deskew=ocrmypdf_deskew,
