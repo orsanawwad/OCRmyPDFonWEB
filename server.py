@@ -22,6 +22,7 @@ ocrmypdf_ocr=False
 ocrmypdf_remove_background=False
 ocrmypdf_deskew=False
 ocrmypdf_optimize=1
+ocrmypdf_lang="eng"
 
 st.set_page_config(page_title='OCRmyPDFonWEB')
 
@@ -39,7 +40,10 @@ def uploader_callback():
 
                     fixed_path=path + '_fixed.pdf'
 
-                    ocrmypdf.ocr(path, fixed_path, 
+                    languages = [s for s in ocrmypdf_lang.split("+") if s.strip()]
+
+                    ocrmypdf.ocr(path, fixed_path,
+                        language=languages
                         remove_background=ocrmypdf_remove_background, 
                         optimize=ocrmypdf_optimize,
                         deskew=ocrmypdf_deskew,
@@ -71,6 +75,7 @@ if STATE_FIXED_PDF_PATH not in st.session_state:
         max_value = 3,
         value = 1
     )
+    ocrmypdf_lang = c1.text_input(label='Language to scan with', value="eng")
     c1.file_uploader(label="Upload PDF", on_change=uploader_callback, key=STATE_UPLOADED_FILE)
 else:
     c1.write("Editing of the PDF file has been successfully completed. Now the optimized version is ready for download.")
