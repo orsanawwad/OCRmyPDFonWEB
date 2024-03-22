@@ -75,7 +75,7 @@ if STATE_FIXED_PDF_PATH not in st.session_state:
         max_value = 3,
         value = 1
     )
-    ocrmypdf_lang = c1.text_input(label='Language to scan with', value="eng")
+    ocrmypdf_lang = c1.text_input(label='Languages to scan with, separated by plus sign (+)', value="eng") # TODO Change to tag based components with auto suggestion
     c1.file_uploader(label="Upload PDF", on_change=uploader_callback, key=STATE_UPLOADED_FILE)
 else:
     c1.write("Editing of the PDF file has been successfully completed. Now the optimized version is ready for download.")
